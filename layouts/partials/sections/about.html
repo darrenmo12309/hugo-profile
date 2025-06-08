@@ -1,28 +1,73 @@
 {{ if .Site.Params.about.enable | default false }}
-<section id="about" class="py-0 py-sm-5">
-    <div class="container bg-transparent">
-        <h3 class="text-center bg-transparent">{{ .Site.Params.about.title }}</h3>
-        <div class="bg-transparent row justify-content-center px-3 py-5">
-            {{ if .Site.Params.about.image }}
-            <div class="col-sm-12 col-md-8 col-lg-4 mb-5 mb-sm-0 mb-md-5 mb-lg-0 d-none d-sm-none d-md-block">
-                <div class="image d-flex px-5">
-                    <img src="{{ .Site.Params.about.image }}" class="img-thumbnail mx-auto rounded-circle" alt="">
-                </div>
-            </div>
-            {{ end }}
-            <div class="col-sm-12 col-md-12 col-lg-8 content">
-                {{ .Site.Params.about.content | markdownify }}
-
-                {{ if .Site.Params.about.skills.enable }}
-                {{ .Site.Params.about.skills.title }}
-                <ul>
-                    {{ range .Site.Params.about.skills.items }}
-                    <li>{{ . | markdownify }}</li>
-                    {{ end }}
-                </ul>
-                {{ end }}
-            </div>
-        </div>
+<section id="about" class="py-5" style="background-color: #2f2f2f; color: #ffffff;">
+  <div class="container">
+    <!-- Section Heading -->
+    <h2 class="text-center mb-4 display-5 fw-semibold" data-aos="fade-down">
+      {{ .Site.Params.about.title }}
+    </h2>
+    <div class="text-center mb-5" data-aos="fade-up">
+      <hr style="border: none; height: 6px; background-color: #ffffff; border-radius: 4px; width: 25%; margin: auto;" />
     </div>
+
+    <div class="row justify-content-center align-items-center g-4">
+      <!-- Profile Image -->
+      {{ if .Site.Params.about.image }}
+      <div class="col-lg-4 text-center" data-aos="zoom-in">
+        <img src="{{ .Site.Params.about.image }}" class="img-thumbnail rounded-circle shadow-sm" alt="About image" style="max-width: 250px;">
+      </div>
+      {{ end }}
+
+      <!-- About Content -->
+      <div class="col-lg-8" data-aos="fade-left">
+        <div class="mb-4">
+          {{ .Site.Params.about.content | markdownify }}
+        </div>
+
+        <!-- Thick Divider -->
+        <hr style="border: none; height: 6px; background-color: #ffffff; border-radius: 4px; margin: 3rem 0;" />
+
+       <div class="row">
+  <!-- Languages -->
+  {{ if .Site.Params.about.languages.enable }}
+  <div class="col-md-6">
+    <h4 class="fw-semibold mt-3" data-aos="fade-up" data-aos-delay="100">
+      {{ .Site.Params.about.languages.title }}
+    </h4>
+    <ul class="list-unstyled ps-3">
+      {{ $items := .Site.Params.about.languages.items }}
+      {{ range $i, $item := $items }}
+      <li class="mb-2" data-aos="fade-up" data-aos-delay="{{ mul $i 100 }}">
+        <i class="bi bi-chevron-right me-2 text-info"></i>{{ $item | markdownify }}
+      </li>
+      {{ end }}
+    </ul>
+  </div>
+  {{ end }}
+
+  <!-- Technologies -->
+  {{ if .Site.Params.about.technologies.enable }}
+  <div class="col-md-6">
+    <h4 class="fw-semibold mt-3" data-aos="fade-up" data-aos-delay="200">
+      {{ .Site.Params.about.technologies.title }}
+    </h4>
+    <ul class="list-unstyled ps-3">
+      {{ $items := .Site.Params.about.technologies.items }}
+      {{ range $i, $item := $items }}
+      <li class="mb-2" data-aos="fade-up" data-aos-delay="{{ add 200 (mul $i 100) }}">
+        <i class="bi bi-chevron-right me-2 text-info"></i>{{ $item | markdownify }}
+      </li>
+      {{ end }}
+    </ul>
+  </div>
+  {{ end }}
+</div>
+
+      </div>
+    </div>
+  </div>
 </section>
 {{ end }}
+
+
+
+
